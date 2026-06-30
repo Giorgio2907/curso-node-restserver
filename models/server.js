@@ -5,7 +5,7 @@ class Server {
 
     constructor() {
         this.app  = express();
-        this.port = process.env.PORT || 8080;
+        this.port = process.env.PORT || 3000;
         
         // Definimos la propiedad con la ruta base de nuestros usuarios
         this.usuariosPath = '/api/usuarios';
