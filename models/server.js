@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-
+const { dbConnection } = require('../database/config');
 class Server {
 
     constructor() {
@@ -10,13 +10,17 @@ class Server {
         // Definimos la propiedad con la ruta base de nuestros usuarios
         this.usuariosPath = '/api/usuarios';
 
+        this.conectarDB();
+
         // Middlewares
         this.middlewares();
 
         // Rutas de mi aplicación
         this.routes();
     }
-
+    async conectarDB() {       
+        await dbConnection();
+    }
     middlewares() {
         // CORS
         this.app.use( cors() );
