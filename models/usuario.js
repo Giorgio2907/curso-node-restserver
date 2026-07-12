@@ -10,9 +10,9 @@ const UsuarioSchema = Schema({
     google:   { type: Boolean, default: false }
 });
 
-// Oculta password y v en las respuestas, y renombra _id a uid
+// Oculta password y __v en las respuestas, y renombra _id a uid
 UsuarioSchema.methods.toJSON = function() {
-    const { v, password, _id, ...usuario } = this.toObject();
+    const { __v, password, _id, ...usuario } = this.toObject();
     usuario.uid = _id;
     return usuario;
 }
