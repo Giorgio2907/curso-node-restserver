@@ -51,10 +51,14 @@ const usuariosPost = async (req, res = response) => {
     res.json({ usuario });
 }
 
-const usuariosDelete = (req, res = response) => {
-    res.json({
-        msg: 'delete API - controlador'
-    });
+const usuariosDelete = async (req, res = response) => {
+    const { id } = req.params;
+    const usuario = await Usuario.findByIdAndUpdate(id, { estado: false }, { new: true });
+
+    const { __v, password, _id, ...resto } = usuario.toObject();
+    resto.uid = _id;
+
+    res.json({ usuario: resto });
 }
 
 const usuariosPatch = (req, res = response) => {

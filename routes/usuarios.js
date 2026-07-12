@@ -29,7 +29,15 @@ router.post('/', [
     check('rol').custom( esRoleValido ),
     validarCampos
 ], usuariosPost );
-router.delete('/', usuariosDelete );
-router.patch('/', usuariosPatch );
+router.delete('/:id', [
+    check('id', 'No es un ID válido').isMongoId(),
+    check('id').custom( existeUsuarioPorId ),
+    validarCampos
+], usuariosDelete );
+router.patch('/:id', [
+    check('id', 'No es un ID válido').isMongoId(),
+    check('id').custom( existeUsuarioPorId ),
+    validarCampos
+], usuariosPatch );
 
 module.exports = router;
